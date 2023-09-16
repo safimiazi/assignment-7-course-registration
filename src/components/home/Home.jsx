@@ -12,7 +12,7 @@ const Home = () => {
 
 
     useEffect( () => {
-        fetch('data.json')
+        fetch('/data.json')
         .then(res => res.json())
         .then(data => setAllData(data))
     }, [])
