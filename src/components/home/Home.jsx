@@ -12,7 +12,7 @@ const Home = () => {
 
 
     useEffect( () => {
-        fetch('/data.json')
+        fetch('data.json')
         .then(res => res.json())
         .then(data => setAllData(data))
     }, [])
@@ -21,7 +21,7 @@ const Home = () => {
 
     let count = data.duration;
     selectedCourse.forEach(credit => count += credit.duration)
-    const remaining = totalRemaining - totalCredit;
+    // const remaining = totalRemaining - totalCredit;
 
     if(!selectedCourse.includes(data) && totalCredit <= 20){
     setSelectedCourse([...selectedCourse, data])
