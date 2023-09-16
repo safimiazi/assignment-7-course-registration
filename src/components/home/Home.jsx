@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Card from "../card/Card";
 import Cart from "../cart/Cart";
-
+import Swal from "sweetalert2";
 
 const Home = () => {
     const [allData, setAllData] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState([]);
     const [totalCredit, setTotalCredit] = useState(0);
-    const [totalRemaining, setTotalRemaining] = useState(20);
+    const [totalRemaining, setTotalRemaining] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
 
 
@@ -18,14 +18,37 @@ const Home = () => {
     }, [])
   
    const handleButton = (data) => {
-    setSelectedCourse([...selectedCourse, data])
 
-    const credit = totalCredit + data.duration;
-    setTotalCredit(credit)
-
+    let count = data.duration;
+    selectedCourse.forEach(credit => count += credit.duration)
     const remaining = totalRemaining - totalCredit;
-    setTotalRemaining(remaining)
 
+    if(!selectedCourse.includes(data) && totalCredit <= 20){
+    setSelectedCourse([...selectedCourse, data])
+   }else{
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+   }
+   
+
+   if(count > 20){
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+   }else{
+    setTotalCredit(count)
+    setTotalRemaining(20 - count)
+
+   }
+
+    
     const price = totalPrice + data.price;
     setTotalPrice(price)
 

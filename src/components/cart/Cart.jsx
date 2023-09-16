@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
 
 
@@ -21,7 +22,7 @@ const Cart = ({selectedCourse, totalCredit, totalRemaining, totalPrice}) => {
                     <hr />
                     <p className='font-bold'>Total Credit Hour : {totalCredit} hr</p>
                     <hr />
-                    <p className='font-bold'>Total Price : {totalPrice} USD</p>
+                    <p className='font-bold'>Total Price : {totalPrice.toFixed(2)} USD</p>
         </div>
     );
 };
